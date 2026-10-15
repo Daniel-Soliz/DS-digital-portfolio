@@ -1,0 +1,83 @@
+/* DS Digital — palco cinematográfico interativo (sem dependências externas) */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+.hero-motion-layer {
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 79% 47%, rgba(19, 53, 86, .64) 0%, transparent 48%),
+    radial-gradient(ellipse at 19% 15%, rgba(10, 33, 60, .55) 0%, transparent 52%),
+    linear-gradient(130deg, #05090e 4%, #081321 56%, #03080f 100%);
+}
+.hero-motion-layer canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .9;
+}
+.hero-motion-spotlight {
+  position: absolute;
+  left: var(--hero-x, 68%);
+  top: var(--hero-y, 52%);
+  width: min(68vw, 960px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58, 151, 235, .17) 0%, rgba(29, 93, 158, .08) 35%, transparent 70%);
+  filter: blur(16px);
+  mix-blend-mode: screen;
+}
+.hero-motion-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 9, 14, .15), transparent 20%, transparent 76%, #101112 100%),
+    linear-gradient(90deg, rgba(5, 9, 14, .43), transparent 35%, rgba(5, 9, 14, .21));
+}
+.hero > :not(.hero-motion-layer) {
+  position: relative;
+  z-index: 1;
+}
+.hero .selection-frame {
+  background: linear-gradient(105deg, rgba(3, 10, 18, .56), rgba(9, 21, 35, .1));
+  border-color: rgba(157, 205, 234, .56);
+  box-shadow: 0 26px 85px rgba(1, 8, 15, .19);
+}
+.hero .cover-label,
+.hero .cover-bottom,
+.hero .cover-top,
+.hero .cover-caption {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .65);
+}
+.hero .cover-caption { color: #c0d0dc; }
+.hero .round-link span {
+  background: rgba(14, 32, 49, .42);
+  backdrop-filter: blur(8px);
+  transition: transform .25s ease, background .25s ease;
+}
+.hero .round-link:hover span {
+  transform: translateY(4px);
+  background: rgba(45, 111, 164, .35);
+}
+@media (max-width: 600px) {
+  .hero-motion-layer {
+    background:
+      radial-gradient(ellipse at 80% 40%, rgba(22, 60, 96, .5), transparent 62%),
+      linear-gradient(145deg, #05090e, #0b1a2a 56%, #03080f);
+  }
+  .hero-motion-layer canvas { opacity: .67; }
+  .hero-motion-spotlight { width: 110vw; opacity: .7; }
+  .hero .selection-frame { background: rgba(5, 13, 23, .49); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-motion-layer canvas { opacity: .45; }
+  .hero-motion-spotlight { opacity: .4; }
+  .hero .round-link span { transition: none; }
+}
