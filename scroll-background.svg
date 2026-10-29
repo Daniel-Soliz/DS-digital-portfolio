@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <radialGradient id="halo"><stop stop-color="#245a7c" stop-opacity=".55"/><stop offset=".55" stop-color="#14354e" stop-opacity=".24"/><stop offset="1" stop-color="#101112" stop-opacity="0"/></radialGradient>
+ <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4e9ff" stop-opacity=".45"/><stop offset=".5" stop-color="#4e9fd0" stop-opacity=".22"/><stop offset="1" stop-color="#a9ddff" stop-opacity=".04"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="38"/></filter>
+</defs>
+<rect width="1600" height="1000" fill="#101112"/>
+<ellipse cx="1150" cy="450" rx="720" ry="560" fill="url(#halo)"/>
+<ellipse cx="250" cy="770" rx="470" ry="330" fill="#235d83" opacity=".16" filter="url(#blur)"/>
+<g fill="none" stroke="url(#stroke)" stroke-width="1.5">
+ <path d="M-150 740 C250 230 690 1040 1100 480 S1620 110 1830 390"/>
+ <path d="M-150 700 C260 190 700 1000 1090 440 S1630 70 1830 350"/>
+ <path d="M-150 660 C270 150 710 960 1080 400 S1640 30 1830 310"/>
+ <path d="M-150 620 C280 110 720 920 1070 360 S1650 -10 1830 270"/>
+ <path d="M-150 780 C240 270 680 1080 1110 520 S1610 150 1830 430"/>
+ <path d="M-150 820 C230 310 670 1120 1120 560 S1600 190 1830 470"/>
+ <path d="M-150 860 C220 350 660 1160 1130 600 S1590 230 1830 510"/>
+</g>
+<g fill="none" stroke="#a9ddff" stroke-opacity=".16" stroke-width="1">
+ <circle cx="1150" cy="450" r="160"/><circle cx="1150" cy="450" r="265"/><circle cx="1150" cy="450" r="380"/><circle cx="1150" cy="450" r="505"/>
+ <path d="M1150 -100V1000M500 450H1700"/>
+</g>
+<g fill="#b9e7ff" opacity=".4"><circle cx="390" cy="318" r="2"/><circle cx="780" cy="720" r="2"/><circle cx="1320" cy="188" r="3"/><circle cx="1430" cy="810" r="2"/></g>
+</svg>
