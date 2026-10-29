@@ -1,30 +1,12 @@
-/* DS Digital: somente a imagem do fundo reage ao scroll e ao mouse.
-   As cores originais, fontes e animações já existentes permanecem intactas. */
+/* Fundo interativo DS Digital: partículas e conexões, sem alterar tipografia. */
 body { overflow-x:clip; }
 .ds-interactive-background {
-  position:fixed;
-  inset:-14vh -12vw;
-  z-index:0;
-  pointer-events:none;
-  background-image:url("./scroll-background.svg");
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:cover;
-  opacity:.72;
-  transform:translate3d(var(--ds-bg-x,0px),var(--ds-bg-y,0px),0) scale(1.04);
-  will-change:transform;
-}
-.ds-interactive-background::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(16,17,18,.05),rgba(16,17,18,.18) 55%,rgba(16,17,18,.36));
+  position:fixed; inset:0; width:100%; height:100%; z-index:0;
+  pointer-events:none; display:block;
+  background:radial-gradient(ellipse at 75% 35%,#0b2227 0%,#081419 42%,#101112 100%);
 }
 main,footer { position:relative;z-index:1; }
 .header { z-index:20; }
-@media(max-width:600px) {
-  .ds-interactive-background { inset:-10vh -24vw;opacity:.58; }
-}
-@media(prefers-reduced-motion:reduce) {
-  .ds-interactive-background { transform:none;will-change:auto; }
-}
+.hero-motion-layer { background:transparent!important; }
+.hero-motion-layer canvas,.hero-motion-spotlight,.hero-motion-vignette { display:none!important; }
+@media(prefers-reduced-motion:reduce) { .ds-interactive-background { opacity:.8; } }
