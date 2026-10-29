@@ -20,14 +20,14 @@
     canvas.width=Math.round(width*ratio);
     canvas.height=Math.round(height*ratio);
     ctx.setTransform(ratio,0,0,ratio,0,0);
-    const count=Math.min(coarse?36:78,Math.max(22,Math.round(width*height/(coarse?22000:15500))));
+    const count=Math.min(coarse?36:125,Math.max(32,Math.round(width*height/(coarse?22000:10500))));
     points=Array.from({length:count},(_,i)=>({
-      x:(i*97.13%count)/count*width,
-      y:(i*67.71%count)/count*height,
+      x:((Math.sin((i+1)*12.9898)*43758.5453)%1+1)%1*width,
+      y:((Math.sin((i+1)*78.233)*19341.2357)%1+1)%1*height,
       driftX:Math.sin(i*8.21)*(.16+(i%4)*.08),
       driftY:Math.cos(i*5.13)*(.13+(i%3)*.07),
       phase:i*2.39,
-      size:i%7===0?2.4:1.2,
+      size:i%7===0?3.1:1.7,
       glow:i%5===0
     }));
     draw(0);
@@ -45,8 +45,8 @@
       if(pointer.active && !reduced) {
         const dx=x-pointer.x,dy=y-pointer.y;
         const distance=Math.hypot(dx,dy);
-        if(distance<165 && distance>0.1) {
-          const force=Math.pow(1-distance/165,2)*72;
+        if(distance<270 && distance>0.1) {
+          const force=Math.pow(1-distance/270,1.5)*155;
           x+=dx/distance*force;
           y+=dy/distance*force;
         }
@@ -56,11 +56,13 @@
     for(let i=0;i<positions.length;i++){
       for(let j=i+1;j<positions.length;j++){
         const a=positions[i],b=positions[j],distance=Math.hypot(a.x-b.x,a.y-b.y);
-        const limit=coarse?150:190;
+        const limit=coarse?160:205;
         if(distance>limit)continue;
-        const alpha=(1-distance/limit)*.3;
+        const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+        const nearCursor=pointer.active && Math.hypot(midX-pointer.x,midY-pointer.y)<280;
+        const alpha=(1-distance/limit)*(nearCursor?.78:.37);
         ctx.strokeStyle='rgba(115,220,226,'+alpha.toFixed(3)+')';
-        ctx.lineWidth=.7;
+        ctx.lineWidth=nearCursor?1.15:.7;
         ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
       }
     }
@@ -73,6 +75,13 @@
       ctx.fill();
     }
     ctx.shadowBlur=0;
+    if(pointer.active && !reduced && !coarse) {
+      const glow=ctx.createRadialGradient(pointer.x,pointer.y,0,pointer.x,pointer.y,210);
+      glow.addColorStop(0,'rgba(55,220,230,.12)');
+      glow.addColorStop(1,'rgba(55,220,230,0)');
+      ctx.fillStyle=glow;
+      ctx.beginPath();ctx.arc(pointer.x,pointer.y,210,0,Math.PI*2);ctx.fill();
+    }
   }
 
   function loop(timestamp){
